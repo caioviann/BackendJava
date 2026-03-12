@@ -1,8 +1,9 @@
-package viana.nunes.henrique.caio.ScreenAz;
+package viana.nunes.henrique.caio.screenAz;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import viana.nunes.henrique.caio.screenAz.service.ApiConsumption;
 
 @SpringBootApplication
 public class ScreenAzApplication implements CommandLineRunner {
@@ -12,6 +13,8 @@ public class ScreenAzApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("First project spring without web");
+		var apiConsumption = new ApiConsumption();
+		var json = apiConsumption.getDatas("https://www.omdbapi.com/?t=the+flash&season=5&apikey=ce3ed0d3");
+		System.out.println(json);
 	}
 }
