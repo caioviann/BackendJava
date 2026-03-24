@@ -28,5 +28,9 @@ public class ScreenAzApplication implements CommandLineRunner {
 
 		EpisodeData episodeData = converter.getData(json, EpisodeData.class);
 		System.out.println("Dados episodio: " + episodeData);
+
+		for(int i = 1; i <= data.totalSeasons(); i++){
+
+		}
 	}
 }
