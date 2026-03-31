@@ -7,6 +7,8 @@ import viana.nunes.henrique.caio.screenAz.model.SerieData;
 import viana.nunes.henrique.caio.screenAz.service.ApiConsumption;
 import viana.nunes.henrique.caio.screenAz.service.ConvertsData;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -65,6 +67,22 @@ public class Main {
                 .flatMap(s -> s.episodes().stream()
                         .map(d -> new Episode(s.number(), d))
                 ).collect(Collectors.toList());
+
         episodes.forEach(System.out::println);
+
+        System.out.print("A partir de que ano você deseja ver os episodios? ");
+        var year = scanner.nextInt();
+        scanner.nextLine();
+
+        LocalDate searchDate = LocalDate.of(year, 1, 1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        episodes.stream()
+                .filter(e -> e.getReleaseDate() != null && e.getReleaseDate().isAfter(searchDate))
+                .forEach(e -> System.out.println(
+                        "Temporada: " + e.getSeason() +
+                                " Episodio: " + e.getTitle() +
+                                " Data lançamento: " + e.getReleaseDate().format(formatter)
+                ));
     }
 }
