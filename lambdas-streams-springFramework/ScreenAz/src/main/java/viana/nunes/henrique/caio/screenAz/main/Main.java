@@ -6,9 +6,8 @@ import viana.nunes.henrique.caio.screenAz.model.SerieData;
 import viana.nunes.henrique.caio.screenAz.service.ApiConsumption;
 import viana.nunes.henrique.caio.screenAz.service.ConvertsData;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     private Scanner scanner = new Scanner(System.in);
@@ -38,11 +37,27 @@ public class Main {
 		}
 		seasons.forEach(System.out::println);
 
-        for (int i = 0; i < data.totalSeasons(); i++){
-            List<EpisodeData> episodeSeasons = seasons.get(i).episodes();
-            for (int j = 0; j < episodeSeasons.size(); j++) {
-                System.out.println(episodeSeasons.get(j).title());
-            }
-        }
+//        for (int i = 0; i < data.totalSeasons(); i++){
+//            List<EpisodeData> episodeSeasons = seasons.get(i).episodes();
+//            for (int j = 0; j < episodeSeasons.size(); j++) {
+//                System.out.println(episodeSeasons.get(j).title());
+//            }
+//        }
+        seasons.forEach(s -> s.episodes().forEach(e -> System.out.println(e.title())));
+
+//      List<String> names = Arrays.asList("Jacque", "Iasmim", "Paulo", "Rodrigo", "Nico");
+//      names.stream().sorted().limit(3).filter(n -> n.startsWith("N")).map(n -> n.toUpperCase()).forEach(System.out::println);
+
+        List<EpisodeData> episodeData = seasons.stream()
+                .flatMap(s -> s.episodes().stream())
+                .collect(Collectors.toList());
+
+        System.out.println("\nTop 5 episodios: ");
+
+        episodeData.stream()
+                .filter(e -> !e.rating().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(EpisodeData::rating).reversed())
+                .limit(5)
+                .forEach(System.out::println);
     }
 }
