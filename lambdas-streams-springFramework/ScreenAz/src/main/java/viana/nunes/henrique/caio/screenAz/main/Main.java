@@ -1,5 +1,6 @@
 package viana.nunes.henrique.caio.screenAz.main;
 
+import viana.nunes.henrique.caio.screenAz.model.EpisodeData;
 import viana.nunes.henrique.caio.screenAz.model.SeasonData;
 import viana.nunes.henrique.caio.screenAz.model.SerieData;
 import viana.nunes.henrique.caio.screenAz.service.ApiConsumption;
@@ -36,5 +37,12 @@ public class Main {
 			seasons.add(seasonData);
 		}
 		seasons.forEach(System.out::println);
+
+        for (int i = 0; i < data.totalSeasons(); i++){
+            List<EpisodeData> episodeSeasons = seasons.get(i).episodes();
+            for (int j = 0; j < episodeSeasons.size(); j++) {
+                System.out.println(episodeSeasons.get(j).title());
+            }
+        }
     }
 }
