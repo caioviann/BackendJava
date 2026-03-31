@@ -1,5 +1,6 @@
 package viana.nunes.henrique.caio.screenAz.main;
 
+import viana.nunes.henrique.caio.screenAz.model.Episode;
 import viana.nunes.henrique.caio.screenAz.model.EpisodeData;
 import viana.nunes.henrique.caio.screenAz.model.SeasonData;
 import viana.nunes.henrique.caio.screenAz.model.SerieData;
@@ -59,5 +60,11 @@ public class Main {
                 .sorted(Comparator.comparing(EpisodeData::rating).reversed())
                 .limit(5)
                 .forEach(System.out::println);
+
+        List<Episode> episodes = seasons.stream()
+                .flatMap(s -> s.episodes().stream()
+                        .map(d -> new Episode(s.number(), d))
+                ).collect(Collectors.toList());
+        episodes.forEach(System.out::println);
     }
 }
