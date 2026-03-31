@@ -4,9 +4,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import viana.nunes.henrique.caio.screenAz.model.EpisodeData;
+import viana.nunes.henrique.caio.screenAz.model.SeasonData;
 import viana.nunes.henrique.caio.screenAz.model.SerieData;
 import viana.nunes.henrique.caio.screenAz.service.ApiConsumption;
 import viana.nunes.henrique.caio.screenAz.service.ConvertsData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class ScreenAzApplication implements CommandLineRunner {
@@ -29,8 +33,13 @@ public class ScreenAzApplication implements CommandLineRunner {
 		EpisodeData episodeData = converter.getData(json, EpisodeData.class);
 		System.out.println("Dados episodio: " + episodeData);
 
-		for(int i = 1; i <= data.totalSeasons(); i++){
+		List<SeasonData> seasons = new ArrayList<>();
 
+		for(int i = 1; i <= data.totalSeasons(); i++){
+			json = apiConsumption.getDatas("https://www.omdbapi.com/?t=the+flash&season=" + i + "&apikey=ce3ed0d3");
+			SeasonData seasonData = converter.getData(json, SeasonData.class);
+			seasons.add(seasonData);
 		}
+		seasons.forEach(System.out::println);
 	}
 }
