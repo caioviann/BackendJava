@@ -40,16 +40,21 @@ public class Main {
 		}
 		seasons.forEach(System.out::println);
 
+//      FORMA MAIS VERBOSA DE FAZER
 //        for (int i = 0; i < data.totalSeasons(); i++){
 //            List<EpisodeData> episodeSeasons = seasons.get(i).episodes();
 //            for (int j = 0; j < episodeSeasons.size(); j++) {
 //                System.out.println(episodeSeasons.get(j).title());
 //            }
 //        }
+
+        //FORMA MAIS SIMPLES COM LAMBDAS
         seasons.forEach(s -> s.episodes().forEach(e -> System.out.println(e.title())));
 
+//      EXEMPLO DE STREAMS -----------------------------------
 //      List<String> names = Arrays.asList("Jacque", "Iasmim", "Paulo", "Rodrigo", "Nico");
 //      names.stream().sorted().limit(3).filter(n -> n.startsWith("N")).map(n -> n.toUpperCase()).forEach(System.out::println);
+//      ----------------------------------------------------------------------
 
         List<EpisodeData> episodeData = seasons.stream()
                 .flatMap(s -> s.episodes().stream())
