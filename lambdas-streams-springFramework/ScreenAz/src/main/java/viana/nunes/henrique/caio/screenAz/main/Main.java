@@ -51,10 +51,6 @@ public class Main {
         //FORMA MAIS SIMPLES COM LAMBDAS
         seasons.forEach(s -> s.episodes().forEach(e -> System.out.println(e.title())));
 
-//      EXEMPLO DE STREAMS -----------------------------------
-//      List<String> names = Arrays.asList("Jacque", "Iasmim", "Paulo", "Rodrigo", "Nico");
-//      names.stream().sorted().limit(3).filter(n -> n.startsWith("N")).map(n -> n.toUpperCase()).forEach(System.out::println);
-//      ----------------------------------------------------------------------
 
         List<EpisodeData> episodeData = seasons.stream()
                 .flatMap(s -> s.episodes().stream())
@@ -91,3 +87,9 @@ public class Main {
                 ));
     }
 }
+
+
+//      EXEMPLO DE STREAMS -----------------------------------
+//      List<String> names = Arrays.asList("Jacque", "Iasmim", "Paulo", "Rodrigo", "Nico");
+//      names.stream().sorted().limit(3).filter(n -> n.startsWith("N")).map(n -> n.toUpperCase()).forEach(System.out::println);
+//      ----------------------------------------------------------------------
