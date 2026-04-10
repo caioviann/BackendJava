@@ -108,11 +108,11 @@ public class Main {
                 .collect(Collectors.groupingBy(Episode::getSeason,
                         Collectors.averagingDouble(Episode::getRating)));
         System.out.println(seasonsRating);
+
+        DoubleSummaryStatistics est = episodes.stream()
+                .filter(e -> e.getRating() > 0)
+                .collect(Collectors.summarizingDouble(Episode::getRating));
+
+        System.out.println(est);
     }
 }
-
-
-//      EXEMPLO DE STREAMS -----------------------------------
-//      List<String> names = Arrays.asList("Jacque", "Iasmim", "Paulo", "Rodrigo", "Nico");
-//      names.stream().sorted().limit(3).filter(n -> n.startsWith("N")).map(n -> n.toUpperCase()).forEach(System.out::println);
-//      ----------------------------------------------------------------------
