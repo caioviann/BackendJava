@@ -102,6 +102,12 @@ public class Main {
 //                                " Episodio: " + e.getTitle() +
 //                                " Data lançamento: " + e.getReleaseDate().format(formatter)
 //                ));
+
+        Map<Integer, Double> seasonsRating = episodes.stream()
+                .filter(e -> e.getRating() > 0)
+                .collect(Collectors.groupingBy(Episode::getSeason,
+                        Collectors.averagingDouble(Episode::getRating)));
+        System.out.println(seasonsRating);
     }
 }
 
