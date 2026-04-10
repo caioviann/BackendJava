@@ -113,6 +113,9 @@ public class Main {
                 .filter(e -> e.getRating() > 0)
                 .collect(Collectors.summarizingDouble(Episode::getRating));
 
-        System.out.println(est);
+        System.out.println("Media: " + est.getAverage());
+        System.out.println("Pior episodio: " + est.getMin());
+        System.out.println("Melhor episodio: " + est.getMax());
+        System.out.println("Quantidade de episodios: " + est.getCount());
     }
 }
