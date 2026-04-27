@@ -75,4 +75,15 @@ public class Serie {
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
     }
+
+    @Override
+    public String toString() {
+        return "genero=" + genero +
+                ", titulo='" + titulo + '\'' +
+                ", totalTemporadas=" + totalTemporadas +
+                ", avaliacao=" + avaliacao +
+                ", atores='" + atores + '\'' +
+                ", poster='" + poster + '\'' +
+                ", sinopse='" + sinopse + '\'';
+    }
 }
