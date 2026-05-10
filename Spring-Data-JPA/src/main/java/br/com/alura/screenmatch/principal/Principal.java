@@ -101,6 +101,7 @@ public class Principal {
                     .flatMap(d -> d.episodios().stream()
                             .map(e -> new Episodio(d.numero(), e)))
                     .collect(Collectors.toList());
+            repositorio.save(serieEncontrada);
         }else {
             System.out.println("Serie não encontrada.");
         }
