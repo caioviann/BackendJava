@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.stream;
+
 public class Principal {
 
     private Scanner leitura = new Scanner(System.in);
@@ -94,6 +96,11 @@ public class Principal {
                 temporadas.add(dadosTemporada);
             }
             temporadas.forEach(System.out::println);
+
+            List<Episodio> episodios = temporadas.stream()
+                    .flatMap(d -> d.episodios().stream()
+                            .map(e -> new Episodio(d.numero(), e)))
+                    .collect(Collectors.toList());
         }else {
             System.out.println("Serie não encontrada.");
         }
