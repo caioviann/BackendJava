@@ -1,10 +1,7 @@
 package br.com.alura.screenmatch.principal;
 
 import br.com.alura.screenmatch.Repository.SerieRepository;
-import br.com.alura.screenmatch.model.DadosSerie;
-import br.com.alura.screenmatch.model.DadosTemporada;
-import br.com.alura.screenmatch.model.Episodio;
-import br.com.alura.screenmatch.model.Serie;
+import br.com.alura.screenmatch.model.*;
 import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +36,7 @@ public class Principal {
                 4 - Buscar serie por titulo
                 5 - Buscar serie por ator
                 6 - Top 5 series
-                7 - buscar serie por categoria
+                7 - Buscar serie por categoria
                 0 - Sair                                 
                 """;
 
@@ -164,7 +161,10 @@ public class Principal {
 
     private void buscarSeriesPorCategoria(){
         System.out.println("Deseja buscar series de que categoria/genero? ");
-        var nomeGenero = leitura.
+        var nomeGenero = leitura.nextLine();
+        Categoria categoria = Categoria.fromPtBr(nomeGenero);
         List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
+        System.out.println("Series da categoria " + nomeGenero);
+        seriesPorCategoria.forEach(System.out::println);
     }
 }
