@@ -173,13 +173,13 @@ public class Principal {
     }
     private void filtrarSeriesPorTemporadasEAvaliacao(){
         System.out.println("Filtrar séries até quantas temporadas? ");
-        var totalTemporadas = leitura.nextDouble();
+        var totalTemporadas = leitura.nextInt();
         leitura.nextLine();
 
         System.out.println("Com avalicao a partir de que valor? ");
         var avaliacao = leitura.nextDouble();
         leitura.nextLine();
-        List<Serie> filtroSeries = repositorio.seriesPorTemporadaEAvaliacao();
+        List<Serie> filtroSeries = repositorio.seriesPorTemporadaEAvaliacao(totalTemporadas, avaliacao);
         System.out.println("*** Séries filtrados ***");
         filtroSeries.forEach(s ->
                 System.out.println(s.getTitulo() + " - avaliacao: " + s.getAvaliacao()));
