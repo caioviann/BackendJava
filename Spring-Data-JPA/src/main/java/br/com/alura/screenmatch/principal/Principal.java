@@ -143,7 +143,6 @@ public class Principal {
     }
 
     private void buscarSeriePorTitulo() {
-        listarSeriesBuscadas();
         System.out.print("Escolha uma serie pelo nome: ");
         var nomeSerie = leitura.nextLine();
         serieBusca = repositorio.findByTituloContainingIgnoreCase(nomeSerie);
@@ -209,6 +208,13 @@ public class Principal {
         if(serieBusca.isPresent()){
             Serie serie = serieBusca.get();
             List<Episodio> topEpisodios = repositorio.topEpisodiosPorSerie(serie);
+            topEpisodios.forEach(e ->
+                    System.out.printf("Serie: %s Temporada %s - Episodio %s - %s\n",
+                            e.getSerie().getTitulo(),
+                            e.getTemporada(),
+                            e.getNumeroEpisodio(),
+                            e.getTitulo(),
+                            e.getAvaliacao()));
         }
     }
 }
