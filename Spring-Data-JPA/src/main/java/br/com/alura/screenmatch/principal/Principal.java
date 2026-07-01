@@ -38,6 +38,7 @@ public class Principal {
                 6 - Top 5 series
                 7 - Buscar serie por categoria
                 8 - Filtrar  séries
+                9 - Buscar Episodio Por Nome
                 0 - Sair                                 
                 """;
 
@@ -73,6 +74,8 @@ public class Principal {
                 case 8:
                     filtrarSeriesPorTemporadasEAvaliacao();
                     break;
+                case 9:
+                    buscarEpisodioPorNome();
                 default:
                     System.out.println("Opção inválida");
             }
@@ -183,5 +186,18 @@ public class Principal {
         System.out.println("*** Séries filtrados ***");
         filtroSeries.forEach(s ->
                 System.out.println(s.getTitulo() + " - avaliacao: " + s.getAvaliacao()));
+    }
+
+    private void buscarEpisodioPorNome() {
+        System.out.println("Digite o nome do episodio? ");
+        var trechoEpisodio = leitura.nextLine();
+        List<Episodio> episodiosEncontrados = repositorio.episodioPorTrecho(trechoEpisodio);
+
+        episodiosEncontrados.forEach(e ->
+                System.out.printf("Serie: %s Temporada %s - Episodio %s - %s\n",
+                        e.getSerie().getTitulo(),
+                        e.getTemporada(),
+                        e.getNumeroEpisodio(),
+                        e.getTitulo()));
     }
 }
